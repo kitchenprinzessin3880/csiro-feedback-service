@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/10/2015 11:50:16 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="au.csiro.feedback.model.TargetContext" table="target_context" catalog="userfeedback">
+        <id name="contextId" type="java.lang.Integer">
+            <column name="context_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="feedbackTarget" class="au.csiro.feedback.model.FeedbackTarget" fetch="select">
+            <column name="feedback_target" not-null="true" />
+        </many-to-one>
+        <property name="source" type="string">
+            <column name="source" length="150" />
+        </property>
+        <property name="owner" type="string">
+            <column name="owner" length="400" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" length="500" />
+        </property>
+        <property name="accessDate" type="timestamp">
+            <column name="access_date" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

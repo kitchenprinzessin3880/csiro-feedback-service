@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/10/2015 11:50:16 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="au.csiro.feedback.model.FeedbackTarget" table="feedback_target" catalog="userfeedback">
+        <id name="targetId" type="java.lang.Integer">
+            <column name="target_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="targetType" class="au.csiro.feedback.model.TargetType" fetch="select">
+            <column name="target_type" />
+        </many-to-one>
+        <property name="targetName" type="string">
+            <column name="target_name" length="100" />
+        </property>
+        <property name="targetIdentifier" type="string">
+            <column name="target_identifier" length="200" not-null="true" unique="true" />
+        </property>
+        <property name="otherIdentifier" type="string">
+            <column name="other_identifier" length="200" />
+        </property>
+        <set name="feedbackcollectionTargets" table="feedbackcollection_target" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="target_id" not-null="true" />
+            </key>
+            <one-to-many class="au.csiro.feedback.model.FeedbackcollectionTarget" />
+        </set>
+        <set name="targetContexts" table="target_context" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="feedback_target" not-null="true" />
+            </key>
+            <one-to-many class="au.csiro.feedback.model.TargetContext" />
+        </set>
+    </class>
+</hibernate-mapping>

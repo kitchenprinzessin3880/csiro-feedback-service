@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/10/2015 11:50:16 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="au.csiro.feedback.model.FeedbackcollectionTarget" table="feedbackcollection_target" catalog="userfeedback">
+        <id name="objectId" type="java.lang.Integer">
+            <column name="object_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="feedbackTarget" class="au.csiro.feedback.model.FeedbackTarget" fetch="select">
+            <column name="target_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="feedbackCollection" class="au.csiro.feedback.model.FeedbackCollection" fetch="select">
+            <column name="feedback_collection_id" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

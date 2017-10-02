@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/10/2015 11:50:16 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="au.csiro.feedback.model.FeedbackTypes" table="feedback_types" catalog="userfeedback">
+        <id name="feedbacktypeId" type="java.lang.Integer">
+            <column name="feedbacktype__id" />
+            <generator class="identity" />
+        </id>
+        <property name="feedbacktypeCode" type="string">
+            <column name="feedbacktype_code" length="50" not-null="true" />
+        </property>
+        <property name="feedbacktypeDesc" type="string">
+            <column name="feedbacktype_desc" length="100" />
+        </property>
+        <property name="identifier" type="string">
+            <column name="identifier" length="250" />
+        </property>
+        <set name="feedbackItems" table="feedback_item" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="purpose" not-null="true" />
+            </key>
+            <one-to-many class="au.csiro.feedback.model.FeedbackItem" />
+        </set>
+    </class>
+</hibernate-mapping>

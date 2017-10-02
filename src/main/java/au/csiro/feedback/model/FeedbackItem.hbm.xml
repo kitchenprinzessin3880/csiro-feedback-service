@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/10/2015 11:50:16 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="au.csiro.feedback.model.FeedbackItem" table="feedback_item" catalog="userfeedback">
+        <id name="feedbackId" type="java.lang.Integer">
+            <column name="feedback_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="status" class="au.csiro.feedback.model.Status" fetch="select">
+            <column name="status" />
+        </many-to-one>
+        <many-to-one name="feedbackItem" class="au.csiro.feedback.model.FeedbackItem" fetch="select">
+            <column name="parent_feedback" />
+        </many-to-one>
+        <many-to-one name="feedbackCollection" class="au.csiro.feedback.model.FeedbackCollection" fetch="select">
+            <column name="feedback_collection_id" />
+        </many-to-one>
+        <many-to-one name="feedbackUser" class="au.csiro.feedback.model.FeedbackUser" fetch="select">
+            <column name="user" not-null="true" />
+        </many-to-one>
+        <many-to-one name="feedbackTypes" class="au.csiro.feedback.model.FeedbackTypes" fetch="select">
+            <column name="purpose" not-null="true" />
+        </many-to-one>
+        <property name="createdDate" type="timestamp">
+            <column name="created_date" length="19" not-null="true" />
+        </property>
+        <property name="lastModified" type="timestamp">
+            <column name="last_modified" length="19" />
+        </property>
+        <property name="title" type="string">
+            <column name="title" length="50" />
+        </property>
+        <property name="details" type="string">
+            <column name="details" length="300" not-null="true" />
+        </property>
+        <property name="isapproved" type="java.lang.Boolean">
+            <column name="isapproved" />
+        </property>
+        <property name="likeCount" type="java.lang.Integer">
+            <column name="like_count" />
+        </property>
+        <set name="feedbackCollections" table="feedback_collection" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="latest_feedback" unique="true" />
+            </key>
+            <one-to-many class="au.csiro.feedback.model.FeedbackCollection" />
+        </set>
+        <set name="feedbackitemSupplementaries" table="feedbackitem_supplementary" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="feedbackitem_id" not-null="true" />
+            </key>
+            <one-to-many class="au.csiro.feedback.model.FeedbackitemSupplementary" />
+        </set>
+        <set name="feedbackItems" table="feedback_item" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="parent_feedback" />
+            </key>
+            <one-to-many class="au.csiro.feedback.model.FeedbackItem" />
+        </set>
+    </class>
+</hibernate-mapping>

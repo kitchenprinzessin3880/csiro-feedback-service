@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table-filter match-catalog="userfeedback" match-name="feedback_collection"/>
+  <table-filter match-catalog="userfeedback" match-name="feedback_item"/>
+  <table-filter match-catalog="userfeedback" match-name="feedback_target"/>
+  <table-filter match-catalog="userfeedback" match-name="feedback_types"/>
+  <table-filter match-catalog="userfeedback" match-name="feedback_user"/>
+  <table-filter match-catalog="userfeedback" match-name="feedbackcollection_target"/>
+  <table-filter match-catalog="userfeedback" match-name="feedbackitem_supplementary"/>
+  <table-filter match-catalog="userfeedback" match-name="status"/>
+  <table-filter match-catalog="userfeedback" match-name="supplementary_files"/>
+  <table-filter match-catalog="userfeedback" match-name="target_context"/>
+  <table-filter match-catalog="userfeedback" match-name="target_type"/>
+</hibernate-reverse-engineering>

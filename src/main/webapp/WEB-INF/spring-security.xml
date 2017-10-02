@@ -1,0 +1,37 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://www.springframework.org/schema/security
+          http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+
+	<http use-expressions="true" create-session="stateless" >
+     <!--intercept-url pattern="/igsn/**" access="isAuthenticated()" />
+     <intercept-url pattern="/metadata/**" access="isAuthenticated()" / -->
+     <intercept-url pattern="/files/**" access="permitAll" />
+     <!--intercept-url pattern="/**" access="denyAll" / -->
+     <http-basic/>
+ </http>
+ 
+
+	<!--  authentication-manager>
+		<authentication-provider>
+			<user-service>
+				<user name="srccodes" password="password" authorities="ROLE_USER" />
+			</user-service>
+		</authentication-provider>
+	</authentication-manager -->
+
+<!-- Select users and user_roles from database -->
+	<authentication-manager erase-credentials="false">
+	  <authentication-provider>
+		<jdbc-user-service data-source-ref="dataSource"
+		  users-by-username-query=
+		    "select Username,Password, IsActive from registrant where Username=?"
+		  authorities-by-username-query=
+		    "select Username, Role from registrant where Username =?  " />
+	  </authentication-provider>
+	</authentication-manager>
+	
+</beans:beans>

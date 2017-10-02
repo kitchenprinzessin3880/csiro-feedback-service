@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/10/2015 11:50:16 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="au.csiro.feedback.model.SupplementaryFiles" table="supplementary_files" catalog="userfeedback">
+        <id name="fileId" type="java.lang.Integer">
+            <column name="file_id" />
+            <generator class="identity" />
+        </id>
+        <property name="fileName" type="string">
+            <column name="file_name" length="50" not-null="true" />
+        </property>
+        <property name="fileExtension" type="string">
+            <column name="file_extension" length="20" not-null="true">
+                <comment>The file type.</comment>
+            </column>
+        </property>
+        <property name="filePath" type="string">
+            <column name="file_path" length="100">
+                <comment>The directory path of the file to be uploaded.</comment>
+            </column>
+        </property>
+        <property name="fileSize" type="java.lang.Long">
+            <column name="file_size" />
+        </property>
+        <property name="uploadTime" type="timestamp">
+            <column name="upload_time" length="19" />
+        </property>
+        <property name="file" type="binary">
+            <column name="file" />
+        </property>
+        <set name="feedbackitemSupplementaries" table="feedbackitem_supplementary" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="supplementfile_id" not-null="true" />
+            </key>
+            <one-to-many class="au.csiro.feedback.model.FeedbackitemSupplementary" />
+        </set>
+    </class>
+</hibernate-mapping>

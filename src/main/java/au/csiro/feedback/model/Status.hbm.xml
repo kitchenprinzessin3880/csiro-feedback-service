@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/10/2015 11:50:16 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="au.csiro.feedback.model.Status" table="status" catalog="userfeedback">
+        <id name="statusId" type="java.lang.Integer">
+            <column name="status_id" />
+            <generator class="identity" />
+        </id>
+        <property name="code" type="string">
+            <column name="code" length="30" not-null="true" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" length="100" />
+        </property>
+        <set name="feedbackItems" table="feedback_item" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="status" />
+            </key>
+            <one-to-many class="au.csiro.feedback.model.FeedbackItem" />
+        </set>
+    </class>
+</hibernate-mapping>

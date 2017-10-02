@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/10/2015 11:50:16 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="au.csiro.feedback.model.TargetType" table="target_type" catalog="userfeedback">
+        <id name="typeId" type="java.lang.Integer">
+            <column name="type_id" />
+            <generator class="identity" />
+        </id>
+        <property name="code" type="string">
+            <column name="code" length="50" not-null="true" unique="true" />
+        </property>
+        <property name="descriptions" type="string">
+            <column name="descriptions" length="100" />
+        </property>
+        <property name="url" type="string">
+            <column name="url" length="50" />
+        </property>
+        <set name="feedbackTargets" table="feedback_target" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="target_type" />
+            </key>
+            <one-to-many class="au.csiro.feedback.model.FeedbackTarget" />
+        </set>
+    </class>
+</hibernate-mapping>
